@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:15.3
+    container_name: jwt
+    environment:
+      POSTGRES_USER: synergy
+      POSTGRES_PASSWORD: synergy00
+      POSTGRES_DB: test
+    ports:
+      - 5432:5432
