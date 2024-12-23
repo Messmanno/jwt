@@ -1,11 +1,10 @@
 package com.JwtSecurity.Jwt.controller;
 
 import com.JwtSecurity.Jwt.Configuration.JwtUtils;
+import com.JwtSecurity.Jwt.Exception.PersonNotFoundException;
 import com.JwtSecurity.Jwt.entity.User;
 import com.JwtSecurity.Jwt.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,10 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +38,13 @@ public class UserController {
         userRepository.save(user);
 
         return ResponseEntity.ok(userRepository.save(user));
+    }
+
+    //pour tester les exceptions
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUser(@PathVariable Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("utilisateur non trouvé"));
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")
