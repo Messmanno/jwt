@@ -23,14 +23,9 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-
+@RequiredArgsConstructor
 public class UserController {
-    public UserController(PasswordEncoder passwordEncoder, JwtUtils jwtUtils, UserRepository userRepository, AuthenticationManager authenticationManager) {
-        this.passwordEncoder = passwordEncoder;
-        this.jwtUtils = jwtUtils;
-        this.userRepository = userRepository;
-        this.authenticationManager = authenticationManager;
-    }
+
 
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;

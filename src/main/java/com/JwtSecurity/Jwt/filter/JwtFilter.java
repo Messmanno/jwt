@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -18,12 +17,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-
+@RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
-    public JwtFilter(CustomUserDetailsService customUserDetailsService, JwtUtils jwtUtils) {
-        this.customUserDetailsService = customUserDetailsService;
-        this.jwtUtils = jwtUtils;
-    }
+
 
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtUtils jwtUtils;
